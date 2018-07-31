@@ -2,10 +2,10 @@ package com.webhav.dsalgo.dp;
 
 public class MakingChange {
 
-	private static int[] coins = { 10, 6, 1 };
+	private static int[] coins = { 10, 5 };
 
 	public static void main(String[] args) {
-		System.out.println(makeChangeDPBotUp(48));
+		System.out.println(makeChange(48));
 	}
 
 	private static int makeChangeDP(int amount) {
