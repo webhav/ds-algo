@@ -7,8 +7,8 @@ public class KnapsackProblem {
 
 	private static int knapsack(Item[] items, int maxW) {
 		Map<Integer, Map<Integer, Integer>> cache = new HashMap<>();
-		return knapsackDPWithTopDown(items, maxW, 0, cache);
-		//return knapsack(items, maxW, 0);
+		//return knapsackDPWithTopDown(items, maxW, 0, cache);
+		return knapsack(items, maxW, 0);
 	}
 
 	/*
@@ -17,6 +17,7 @@ public class KnapsackProblem {
 	 * Space Complexity : O(n)
 	 */
 	private static int knapsack(Item[] items, int maxW, int i) {
+		System.out.println("method called with + " + i + " maxW " + maxW);
 		if(i == items.length) {
 			return 0;
 		}
@@ -31,6 +32,7 @@ public class KnapsackProblem {
 	}
 	
 	private static int knapsackDPWithTopDown(Item[] items, int maxW, int i, Map<Integer, Map<Integer, Integer>> cache) {
+		System.out.println("method called with + " + i + " maxW " + maxW);
 		if(i == items.length) {
 			return 0;
 		}
@@ -55,10 +57,32 @@ public class KnapsackProblem {
 		}
 		
 	}
+	
+	private static int knapsackBotUp(Item[] items, int maxW) {
+		int[][] cache = new int[items.length + 1][maxW + 1];
+		
+		for(int i=1; i<= items.length; i++) {
+			for(int j=0; j<=maxW; j++) {
+				if(items[i-1].getWeigth() > j) {
+					cache[i][j] = cache[i-1][j];
+				} else {
+					cache[i][j] = Math.max(cache[i-1][j], cache[i-1][j-items[i-1].getWeigth()] + items[i-1].getValue());
+				}
+			}
+		}
+		
+		for(int i=0; i<cache.length; i++) {
+			for(int j=0; j<cache[i].length; j++) {
+				System.out.println(i + ":" + j + " = " + cache[i][j]);
+			}
+		}
+		
+		return cache[items.length][maxW];
+	}
 
 	public static void main(String[] args) {
 		Item[] items = new Item[] {(new Item(2, 6)), new Item(2,10), new Item(3,12)};
-		System.out.println(knapsack(items, 5));
+		System.out.println(knapsackBotUp(items, 5));
 	}
 
 	static class Item {
