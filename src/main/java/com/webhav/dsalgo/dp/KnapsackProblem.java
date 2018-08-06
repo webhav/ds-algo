@@ -58,6 +58,13 @@ public class KnapsackProblem {
 		
 	}
 	
+	/**
+	 * Time Complexity : O(nW)
+	 * Space Complexity : O(nW)
+	 * @param items n is number of item
+	 * @param maxW W is maxWeight
+	 * @return
+	 */
 	private static int knapsackBotUp(Item[] items, int maxW) {
 		int[][] cache = new int[items.length + 1][maxW + 1];
 		
