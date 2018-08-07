@@ -50,9 +50,43 @@ public class TargetSums {
 		return result;
 	}
 	
+	/**
+	 * TimeComplexity O(i*sum(nums))
+	 * SpaceComplexity same as above
+	 * @param input
+	 * @param T
+	 * @return
+	 */
+	public static int targetSumsBotUp(int[] input, int T) {
+		int sum = 0;
+		for(int n: input) sum+=n;
+		int[][] cache = new int[input.length + 1][2*sum+1];
+		if(sum == 0)return 0;
+		
+		cache[0][sum] = 1;
+		
+		for(int i=1; i<=input.length; i++) {
+			for(int j=0; j<2*sum+1; j++) {
+				int prev = cache[i-1][j];
+				if(prev !=0 ) {
+					cache[i][j-input[i-1]] += prev;
+					cache[i][j+input[i-1]] += prev;
+				}
+			}
+		}
+		
+		for(int i=0; i<cache.length; i++) {
+			for(int j=0; j<cache[i].length; j++) {
+				System.out.println(i + ":" + j + " = " + cache[i][j]);
+			}
+		}
+		
+		return cache[input.length][sum + T];
+	}
+	
 	public static void main(String[] args) {
-		int[] input = new int[] {1,1,1,1,1,1};
-		System.out.println(targetSumsDPTopToBot(input, 6));
+		int[] input = new int[] {1,1,1,1,1};
+		System.out.println(targetSumsBotUp(input, 3));
 	}
 
 }
