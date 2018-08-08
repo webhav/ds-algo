@@ -77,8 +77,10 @@ public class TargetSums {
 		
 		for(int i=0; i<cache.length; i++) {
 			for(int j=0; j<cache[i].length; j++) {
-				System.out.println(i + ":" + j + " = " + cache[i][j]);
+				//System.out.println(i + ":" + j + " = " + cache[i][j]);
+				System.out.print(cache[i][j] + "\t");
 			}
+			System.out.println();
 		}
 		
 		return cache[input.length][sum + T];
