@@ -3,7 +3,7 @@ package com.webhav.dsalgo.sorting;
 public class MergeSort {
 	
 	/**
-	 * Time Complexity : O(nlogn)
+	 * Time Complexity : O(nlogn) : Bost best case and worst case
 	 * Space Complexity : O(n)
 	 * Based on divide and conquer
 	 * Out of place as it requires extra space.
