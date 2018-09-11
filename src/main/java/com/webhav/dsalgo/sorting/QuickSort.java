@@ -4,7 +4,7 @@ public class QuickSort {
 
 	public static void main(String[] args) {
 		int[] arr = new int[] {1,6,4,2,8,9,5,3,33,22,11,99,56,43,12};
-		sort(arr, 0, arr.length-1);
+		quickSortIterative(arr, 0, arr.length-1);
 		for(int i=0; i<arr.length; i++) {
 			System.out.print(arr[i] + "\t");
 		}
@@ -28,6 +28,34 @@ public class QuickSort {
 			int q = partition(arr, p, r);
 			sort(arr, p, q-1);
 			sort(arr, q+1, r);
+		}
+	}
+	
+	static void quickSortIterative(int[] arr, int l, int h) {
+		int[] stack = new int [h-l+1];
+		int top = -1;
+		stack[++top] = l;
+		stack[++top] = h;
+		
+		while(top >= 0) {
+			System.out.println(l + ":" + h);
+			h = stack[top--];
+			l = stack[top--];
+			
+			if(h > l) {			
+				int p = partition(arr, l, h);
+				
+				if(p-1 > 1) {
+					stack[++top] = l;
+					stack[++top] = p-1;
+				}
+				
+				if(p+1 < h-1) {
+					stack[++top] = p+1;
+					stack[++top] = h;
+				}
+			}
+			
 		}
 	}
 	
